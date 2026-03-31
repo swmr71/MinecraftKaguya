@@ -6,7 +6,8 @@
       "sounds": [
         {
           "name": "sounds/music/my_bgm",
-          "stream": true
+          "stream": true,
+          "load_on_low_memory": true
         }
       ]
     }
