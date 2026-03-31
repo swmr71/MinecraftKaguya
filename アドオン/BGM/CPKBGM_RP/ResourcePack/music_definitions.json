@@ -1,7 +1,0 @@
-{
-  "custom_bgm": {
-    "event_name": "music.custom_bgm",
-    "max_delay": 0,
-    "min_delay": 0
-  }
-}

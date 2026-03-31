@@ -1,0 +1,14 @@
+{
+  "format_version": "1.14.0",
+  "sound_definitions": {
+    "custom.bgm": {
+      "category": "music",
+      "sounds": [
+        {
+          "name": "sounds/music/my_bgm",
+          "stream": true
+        }
+      ]
+    }
+  }
+}
