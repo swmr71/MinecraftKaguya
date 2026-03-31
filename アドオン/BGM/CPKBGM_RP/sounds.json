@@ -1,10 +1,9 @@
 {
   "my_custom.music": {
     "category": "music",
-    "replace": true,
     "sounds": [
       {
-        "name": "sounds/music/bgm_01",
+        "name": "music/bgm_01",
         "stream": true,
         "volume": 1.0
       }
