@@ -1,8 +1,13 @@
 {
   "my_custom.music": {
     "category": "music",
+    "replace": true,
     "sounds": [
-      "sounds/music/bgm_01"
+      {
+        "name": "sounds/music/bgm_01",
+        "stream": true,
+        "volume": 1.0
+      }
     ]
   }
 }
