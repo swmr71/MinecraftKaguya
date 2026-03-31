@@ -1,3 +1,8 @@
+# 既存の全サウンド（BGM等）を一旦停止させる
+stopsound @a music
+# その後、自分のカスタムBGMを鳴らす
+execute as @a[scores={bgm_timer=0..1}] at @s run playsound my_custom.music @s
+
 # タイマーを進める（1秒間に20カウント進みます）
 scoreboard players add @a bgm_timer 1
 
