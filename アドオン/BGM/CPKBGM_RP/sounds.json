@@ -1,0 +1,8 @@
+{
+  "my_custom.music": {
+    "category": "music",
+    "sounds": [
+      "sounds/music/bgm_01"
+    ]
+  }
+}

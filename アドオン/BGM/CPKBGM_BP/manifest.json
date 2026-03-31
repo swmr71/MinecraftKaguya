@@ -1,0 +1,24 @@
+{
+  "format_version": 2,
+  "header": {
+    "description": "Custom BGM Behavior Pack",
+    "name": "My BGM BP",
+    "uuid": "6180a5d8-323d-41ee-a80d-8b5313b10eef",
+    "version": [0, 0, 1],
+    "min_engine_version": [1, 20, 0]
+  },
+  "modules": [
+    {
+      "description": "Custom BGM Behavior Pack",
+      "type": "data",
+      "uuid": "acb043fd-ab20-4361-887f-19e418380711",
+      "version": [0, 0, 1]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "f2b6786e-9c65-48fb-9a93-f0260b9fb998",
+      "version": [0, 0, 1]
+    }
+  ]
+}

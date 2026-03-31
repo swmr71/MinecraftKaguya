@@ -1,0 +1,17 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "minecraft:player",
+      "is_spawnable": false,
+      "is_summonable": false,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [ "bgm_loop" ]
+      },
+      "animations": {
+        "bgm_loop": "controller.animation.bgm_player"
+      }
+    }
+  }
+}
