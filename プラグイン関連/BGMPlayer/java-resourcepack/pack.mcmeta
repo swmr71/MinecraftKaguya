@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "pack_format": 46,
+    "description": "Custom BGM Pack for Java Edition",
+    "supported_formats": {
+      "min_format": 1,
+      "max_format": 999
+    }
+  }
+}

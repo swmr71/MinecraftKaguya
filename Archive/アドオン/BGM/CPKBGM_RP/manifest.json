@@ -1,0 +1,18 @@
+{
+  "format_version": 2,
+  "header": {
+    "description": "オリジナルBGMを追加するリソースパック",
+    "name": "Custom BGM RP",
+    "uuid": "a1b2c3d4-e5f6-47a8-9b0c-d1e2f3a4b5c6",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 16, 0]
+  },
+  "modules": [
+    {
+      "description": "オリジナルBGMを追加するリソースパック",
+      "type": "resources",
+      "uuid": "f7e8d9c0-b1a2-43d4-8e5f-6a7b8c9d0e1f",
+      "version": [1, 0, 0]
+    }
+  ]
+}

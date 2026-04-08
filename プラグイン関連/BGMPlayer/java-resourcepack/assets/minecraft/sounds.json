@@ -1,0 +1,10 @@
+{
+  "custom.bgm": {
+    "sounds": [
+      {
+        "name": "custom/bgm/bgm",
+        "stream": true
+      }
+    ]
+  }
+}

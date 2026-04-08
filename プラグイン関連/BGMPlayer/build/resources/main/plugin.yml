@@ -1,0 +1,20 @@
+name: BgmPlugin
+version: 1.0.0
+main: com.example.bgmplugin.BgmPlugin
+api-version: "1.21"
+description: Plays custom BGM for all players via resource pack
+authors: [you]
+
+commands:
+  bgmreload:
+    description: Reload BGM plugin config
+    permission: bgm.admin
+  bgmresend:
+    description: Resend resource pack to a player
+    usage: /bgmresend [player]
+    permission: bgm.admin
+
+permissions:
+  bgm.admin:
+    description: Access to BGM admin commands
+    default: op
