@@ -2,7 +2,7 @@
 
 # JavaリソースパックのURL（公開HTTPSサーバーに置いたzipのURL）
 # 例: https://example.com/packs/bgm-java.zip
-resource-pack-url: "https://github.com/swmr71/MinecraftKaguya/releases/download/a/bgm-java.zip"
+resource-pack-url: "https://github.com/swmr71/MinecraftKaguya/releases/download/BGM-latest/resourcepack.zip"
 
 # リソースパックのSHA-1ハッシュ（任意だが推奨）
 # sha1sum bgm-java.zip で取得できる
