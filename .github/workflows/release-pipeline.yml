@@ -4,23 +4,36 @@ on:
   push:
     branches:
       - main
-    # ここでトリガーとなるフォルダを指定
     paths:
       - 'プラグイン関連/BGMPlayer/**'
 
 permissions:
   contents: write
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  # 共通の作業ディレクトリを変数にしておくと管理が楽です
+  BASE_DIR: 'プラグイン関連/BGMPlayer'
+
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
+    # このジョブ内の run ステップはすべて BASE_DIR で実行されるようになります
+    defaults:
+      run:
+        working-directory: ${{ env.BASE_DIR }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # リポジトリ全体をチェックアウト（デフォルト）
 
-      # 1. 既存の BGM-latest をバージョン番号に変更して整理
+      - name: Fetch tags
+        run: git fetch --tags
+
+      # 1. 既存の BGM-latest をリネーム
       - name: Rename old BGM-latest tag
         run: |
           VERSION="v1.0.${{ github.run_number }}"
@@ -31,13 +44,13 @@ jobs:
             git tag -d BGM-latest
             git push origin :refs/tags/BGM-latest
           fi
-          echo "NEW_VERSION=$VERSION" >> $GITHUB_ENV
 
       # 2. リソースパックを ZIP アーカイブ
       - name: Archive resourcepack
         run: |
           cd java-resourcepack
-          zip -r ../resourcepack.zip .
+          zip -r ../../../resourcepack.zip .
+          # ルート（3つ上の階層）にzipを置く
           cd ..
 
       # 3. 新しい BGM-latest タグでリリース投稿
@@ -46,30 +59,37 @@ jobs:
         with:
           tag_name: BGM-latest
           name: "BGM Latest Release (Build ${{ github.run_number }})"
+          # zipはルートに置いたのでパス指定に注意
           files: resourcepack.zip
-          body: "Triggered by changes in プラグイン関連/BGMPlayer"
+          body: "Triggered by changes in ${{ env.BASE_DIR }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 4. SHA1 ハッシュ取得（小文字化）
+      # 4. SHA1 ハッシュ取得
       - name: Calculate SHA1
         id: sha
         run: |
-          RAW_SHA=$(sha1sum resourcepack.zip | awk '{print $1}')
+          RAW_SHA=$(sha1sum ../../../resourcepack.zip | awk '{print $1}')
           LOWER_SHA=$(echo $RAW_SHA | tr '[:upper:]' '[:lower:]' )
           echo "hash=$LOWER_SHA" >> $GITHUB_OUTPUT
 
       # 5. config.yml のハッシュ値を書き換え
-      # ※もし config.yml の場所が変わっている場合は、ここのパスを修正してください
       - name: Update config.yml
         run: |
-          sed -i "s/resource-pack-sha1: \".*\"/resource-pack-sha1: \"${{ steps.sha.outputs.hash }}\"/" src/main/resources/config.yml
+          TARGET_FILE="src/main/resources/config.yml"
+          if [ -f "$TARGET_FILE" ]; then
+            sed -i "s/resource-pack-sha1: \".*\"/resource-pack-sha1: \"${{ steps.sha.outputs.hash }}\"/" "$TARGET_FILE"
+          else
+            echo "Error: $TARGET_FILE not found at $(pwd)"
+            exit 1
+          fi
 
-      # 6. 変更をコミットしてプッシュ（[skip ci] で再発火を防止）
+      # 6. 変更をコミットしてプッシュ
       - name: Commit and Push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          # git add はリポジトリルートからの相対パスで指定
           git add src/main/resources/config.yml
-          git commit -m "chore: update resource-pack-sha1 [skip ci]"
-          git push
+          git commit -m "chore: update resource-pack-sha1 [skip ci]" || echo "No changes"
+          git push origin main
