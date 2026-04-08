@@ -1,0 +1,75 @@
+name: BGM Plugin Release Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    # ここでトリガーとなるフォルダを指定
+    paths:
+      - 'プラグイン関連/BGMPlayer/**'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 1. 既存の BGM-latest をバージョン番号に変更して整理
+      - name: Rename old BGM-latest tag
+        run: |
+          VERSION="v1.0.${{ github.run_number }}"
+          if git rev-parse BGM-latest >/dev/null 2>&1; then
+            echo "Renaming BGM-latest to $VERSION"
+            git tag $VERSION BGM-latest
+            git push origin $VERSION
+            git tag -d BGM-latest
+            git push origin :refs/tags/BGM-latest
+          fi
+          echo "NEW_VERSION=$VERSION" >> $GITHUB_ENV
+
+      # 2. リソースパックを ZIP アーカイブ
+      - name: Archive resourcepack
+        run: |
+          cd java-resourcepack
+          zip -r ../resourcepack.zip .
+          cd ..
+
+      # 3. 新しい BGM-latest タグでリリース投稿
+      - name: Create New BGM-latest Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: BGM-latest
+          name: "BGM Latest Release (Build ${{ github.run_number }})"
+          files: resourcepack.zip
+          body: "Triggered by changes in プラグイン関連/BGMPlayer"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 4. SHA1 ハッシュ取得（小文字化）
+      - name: Calculate SHA1
+        id: sha
+        run: |
+          RAW_SHA=$(sha1sum resourcepack.zip | awk '{print $1}')
+          LOWER_SHA=$(echo $RAW_SHA | tr '[:upper:]' '[:lower:]' )
+          echo "hash=$LOWER_SHA" >> $GITHUB_OUTPUT
+
+      # 5. config.yml のハッシュ値を書き換え
+      # ※もし config.yml の場所が変わっている場合は、ここのパスを修正してください
+      - name: Update config.yml
+        run: |
+          sed -i "s/resource-pack-sha1: \".*\"/resource-pack-sha1: \"${{ steps.sha.outputs.hash }}\"/" src/main/resources/config.yml
+
+      # 6. 変更をコミットしてプッシュ（[skip ci] で再発火を防止）
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add src/main/resources/config.yml
+          git commit -m "chore: update resource-pack-sha1 [skip ci]"
+          git push
