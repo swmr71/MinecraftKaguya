@@ -11,22 +11,30 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BgmManager implements Listener {
 
     private final BgmPlugin plugin;
+    private final Random random = new Random();
 
     // プレイヤーごとのループタスク
     private final Map<UUID, BukkitTask> loopTasks = new ConcurrentHashMap<>();
 
     // 設定キャッシュ
-    private String soundKey;
-    private int durationTicks;
     private float volume;
     private float pitch;
+
+    // サウンドリスト
+    private final List<SoundEntry> soundList = new ArrayList<>();
+
+    /** サウンドエントリ（キーと長さのペア） */
+    private record SoundEntry(String key, int durationTicks) {}
 
     public BgmManager(BgmPlugin plugin) {
         this.plugin = plugin;
@@ -34,16 +42,38 @@ public class BgmManager implements Listener {
     }
 
     public void reload() {
-        soundKey      = plugin.getConfig().getString("sound-key", "custom.bgm");
-        int durationSec = plugin.getConfig().getInt("bgm-duration-seconds", 235);
-        durationTicks = durationSec * 20; // 1秒 = 20tick
-        volume        = (float) plugin.getConfig().getDouble("volume", 1.0);
-        pitch         = (float) plugin.getConfig().getDouble("pitch", 1.0);
+        volume = (float) plugin.getConfig().getDouble("volume", 1.0);
+        pitch  = (float) plugin.getConfig().getDouble("pitch", 1.0);
+
+        // サウンドリストを読み込み
+        soundList.clear();
+        List<Map<?, ?>> sounds = plugin.getConfig().getMapList("sounds");
+        for (Map<?, ?> entry : sounds) {
+            String key = (String) entry.get("key");
+            int duration = (int) entry.getOrDefault("duration-seconds", 240);
+            if (key != null && !key.isBlank()) {
+                soundList.add(new SoundEntry(key, duration * 20));
+            }
+        }
+
+        if (soundList.isEmpty()) {
+            plugin.getLogger().warning("config.yml の sounds が空です！BGMが再生されません。");
+        } else {
+            plugin.getLogger().info(soundList.size() + " 曲を読み込みました。");
+        }
 
         // リロード時は全プレイヤーのループを再起動
         for (Player p : plugin.getServer().getOnlinePlayers()) {
             restartLoop(p);
         }
+    }
+
+    // -------------------------------------------------------
+    // Geyserプレイヤー判定
+    // -------------------------------------------------------
+
+    private boolean isGeyserPlayer(Player player) {
+        return player.getUniqueId().toString().startsWith("00000000-0000-0000-");
     }
 
     // -------------------------------------------------------
@@ -53,11 +83,16 @@ public class BgmManager implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        // 参加時にリソースパックを送信
-        // （パック適用完了後にBGMを開始するため、ここではまだ再生しない）
+
+        if (isGeyserPlayer(player)) {
+            plugin.getLogger().info(player.getName() + " はBedrockプレイヤーです。直接BGMを開始します。");
+            plugin.getServer().getScheduler().runTaskLater(plugin, () -> startLoop(player), 300L);
+            return;
+        }
+
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
             plugin.getResourcePackUtil().sendPack(player);
-        }, 60L); // 3秒後に送信（接続安定化のため）
+        }, 300L);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -65,20 +100,17 @@ public class BgmManager implements Listener {
         cancelLoop(event.getPlayer().getUniqueId());
     }
 
-    /**
-     * リソースパック適用状態を監視してBGM再生を開始する。
-     */
     @EventHandler(priority = EventPriority.MONITOR)
     public void onResourcePackStatus(PlayerResourcePackStatusEvent event) {
         Player player = event.getPlayer();
+        if (isGeyserPlayer(player)) return;
+
         switch (event.getStatus()) {
             case SUCCESSFULLY_LOADED -> {
-                // パック適用成功 → BGMループ開始
                 plugin.getLogger().info(player.getName() + " がリソースパックを適用しました。BGMを開始します。");
                 plugin.getServer().getScheduler().runTaskLater(plugin, () -> startLoop(player), 10L);
             }
             case DECLINED -> {
-                // 拒否された場合はループを停止（適用しなかった人には流さない）
                 plugin.getLogger().info(player.getName() + " がリソースパックを拒否しました。");
                 cancelLoop(player.getUniqueId());
             }
@@ -86,7 +118,7 @@ public class BgmManager implements Listener {
                 plugin.getLogger().warning(player.getName() + " のリソースパック適用に失敗しました: " + event.getStatus());
                 cancelLoop(player.getUniqueId());
             }
-            default -> { /* ACCEPTED(ダウンロード中) などは無視 */ }
+            default -> {}
         }
     }
 
@@ -95,33 +127,40 @@ public class BgmManager implements Listener {
     // -------------------------------------------------------
 
     /**
-     * プレイヤーのBGMループを開始する。
-     * durationTicks ごとに playsound を発火することでループを擬似実現する。
+     * ランダムに1曲選んで再生し、その曲が終わったら次をランダム選択して繰り返す。
      */
     private void startLoop(Player player) {
-        cancelLoop(player.getUniqueId()); // 既存タスクがあればキャンセル
+        cancelLoop(player.getUniqueId());
+        if (soundList.isEmpty()) return;
+        playNext(player);
+    }
 
-        // 即時1回再生してから、durationTicks間隔で繰り返す
-        playSound(player);
+    private void playNext(Player player) {
+        if (!player.isOnline()) {
+            cancelLoop(player.getUniqueId());
+            return;
+        }
 
-        BukkitTask task = plugin.getServer().getScheduler().runTaskTimer(
+        // ランダムに1曲選ぶ
+        SoundEntry entry = soundList.get(random.nextInt(soundList.size()));
+
+        // 再生
+        playSound(player, entry.key());
+
+        plugin.getLogger().info(player.getName() + " に BGM再生: " + entry.key()
+                + " (" + (entry.durationTicks() / 20) + "秒)");
+
+        // 曲が終わったら次を再生
+        BukkitTask task = plugin.getServer().getScheduler().runTaskLater(
                 plugin,
-                () -> {
-                    if (player.isOnline()) {
-                        playSound(player);
-                    } else {
-                        cancelLoop(player.getUniqueId());
-                    }
-                },
-                durationTicks,  // 最初の遅延（曲の長さ後に次を再生）
-                durationTicks   // 繰り返し間隔
+                () -> playNext(player),
+                entry.durationTicks()
         );
 
         loopTasks.put(player.getUniqueId(), task);
     }
 
     private void restartLoop(Player player) {
-        // パック適用済みの人のみ再起動（再適用不要）
         if (loopTasks.containsKey(player.getUniqueId())) {
             startLoop(player);
         }
@@ -134,15 +173,10 @@ public class BgmManager implements Listener {
         }
     }
 
-    /**
-     * Adventure API でサウンドを再生。
-     * MASTER チャンネルで再生することでクライアント側のミュート設定に関わらず流れる。
-     * （musicカテゴリにしたい場合は Sound.Source.MUSIC に変更）
-     */
-    private void playSound(Player player) {
+    private void playSound(Player player, String key) {
         try {
             Sound sound = Sound.sound(
-                    Key.key(soundKey),        // 例: "custom:bgm" または "custom.bgm"
+                    Key.key(key),
                     Sound.Source.MUSIC,
                     volume,
                     pitch
@@ -153,7 +187,6 @@ public class BgmManager implements Listener {
         }
     }
 
-    /** サーバー停止時に全タスクをキャンセル */
     public void cancelAll() {
         loopTasks.values().forEach(task -> {
             if (!task.isCancelled()) task.cancel();

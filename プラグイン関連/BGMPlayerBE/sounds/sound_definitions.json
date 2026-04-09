@@ -1,11 +1,21 @@
 {
   "format_version": "1.14.0",
   "sound_definitions": {
-    "custom.bgm": {
+    "custom.bgm1": {
       "category": "music",
       "sounds": [
         {
-          "name": "sounds/music/bgm",
+          "name": "sounds/music/hosi",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "custom.bgm2": {
+      "category": "music",
+      "sounds": [
+        {
+          "name": "sounds/music/wimine",
           "stream": true,
           "load_on_low_memory": true
         }

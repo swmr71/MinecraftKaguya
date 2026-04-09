@@ -1,10 +1,4 @@
 {
-  "custom.bgm": {
-    "sounds": [
-      {
-        "name": "custom/bgm/bgm",
-        "stream": true
-      }
-    ]
-  }
+  "custom.bgm1": { "sounds": [{ "name": "custom/bgm/hosi", "stream": true }] },
+  "custom.bgm2": { "sounds": [{ "name": "custom/bgm/wimine", "stream": true }] }
 }
