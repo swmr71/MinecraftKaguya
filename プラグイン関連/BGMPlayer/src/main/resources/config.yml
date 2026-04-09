@@ -1,7 +1,7 @@
 # BGM Plugin 設定ファイル
 
 # JavaリソースパックのURL（公開HTTPSサーバーに置いたzipのURL）
-resource-pack-url: "https://your-server.com/packs/bgm-java.zip"
+resource-pack-url: "https://github.com/swmr71/MinecraftKaguya/releases/download/BGM-latest/resourcepack.zip"
 
 # リソースパックのSHA-1ハッシュ（任意だが推奨）
 # sha1sum bgm-java.zip で取得できる
