@@ -3,8 +3,9 @@
 # JavaリソースパックのURL（公開HTTPSサーバーに置いたzipのURL）
 resource-pack-url: "https://your-server.com/packs/bgm-java.zip"
 
-# リソースパックのSHA-1ハッシュ
-resource-pack-sha1: ""
+# リソースパックのSHA-1ハッシュ（任意だが推奨）
+# sha1sum bgm-java.zip で取得できる
+resource-pack-sha1: "a905290e5ffcd4e1c8637630f82580604ac02bb7"
 
 # リソースパックの適用を強制するか
 force-resource-pack: true
