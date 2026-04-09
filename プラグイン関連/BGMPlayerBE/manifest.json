@@ -3,7 +3,7 @@
   "header": {
     "description": "オリジナルBGMを追加するリソースパック",
     "name": "Custom BGM RP",
-    "uuid": "a1b2c3d4-e5f6-47a8-9b0c-d1e2f3a4b5c6",
+    "uuid": "a1b2c3d4-e5f6-47a8-9b0c-d1e2f3a4b5c5",
     "version": [1, 0, 0],
     "min_engine_version": [1, 16, 0]
   },

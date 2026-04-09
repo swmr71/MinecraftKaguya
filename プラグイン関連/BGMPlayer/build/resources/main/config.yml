@@ -1,25 +1,26 @@
 # BGM Plugin 設定ファイル
 
 # JavaリソースパックのURL（公開HTTPSサーバーに置いたzipのURL）
-# 例: https://example.com/packs/bgm-java.zip
 resource-pack-url: "https://github.com/swmr71/MinecraftKaguya/releases/download/BGM-latest/resourcepack.zip"
 
 # リソースパックのSHA-1ハッシュ（任意だが推奨）
 # sha1sum bgm-java.zip で取得できる
 resource-pack-sha1: "a8ac3e8892a98597db1e4ba808216e0bce4e1d72"
 
-# リソースパックの適用を強制するか（falseにすると任意になる）
+# リソースパックの適用を強制するか
 force-resource-pack: true
-
-# BGMのサウンドキー（sounds.jsonのキーと一致させる）
-sound-key: "custom.bgm"
-
-# BGMの長さ（秒）※ループのタイミングに使用
-# 実際の曲の長さより少し短めにすると途切れにくい
-bgm-duration-seconds: 250
 
 # 音量 (0.0 ~ 1.0)
 volume: 1.0
 
 # ピッチ (通常は1.0)
 pitch: 1.0
+
+# BGM一覧（ランダムに選ばれる）
+# key: sounds.jsonのキーと一致させる
+# duration-seconds: 曲の長さ（秒）
+sounds:
+  - key: "custom.bgm1"
+    duration-seconds: 252
+  - key: "custom.bgm2"
+    duration-seconds: 180

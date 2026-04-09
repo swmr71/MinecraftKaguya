@@ -50,7 +50,8 @@ public class BgmManager implements Listener {
         List<Map<?, ?>> sounds = plugin.getConfig().getMapList("sounds");
         for (Map<?, ?> entry : sounds) {
             String key = (String) entry.get("key");
-            int duration = (int) entry.getOrDefault("duration-seconds", 240);
+            Object durObj = entry.get("duration-seconds");
+            int duration = (durObj instanceof Number n) ? n.intValue() : 240;
             if (key != null && !key.isBlank()) {
                 soundList.add(new SoundEntry(key, duration * 20));
             }
