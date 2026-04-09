@@ -57,7 +57,7 @@ public class BgmManager implements Listener {
         // （パック適用完了後にBGMを開始するため、ここではまだ再生しない）
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
             plugin.getResourcePackUtil().sendPack(player);
-        }, 20L); // 1秒後に送信（接続安定化のため）
+        }, 60L); // 3秒後に送信（接続安定化のため）
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
