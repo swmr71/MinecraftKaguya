@@ -1,0 +1,1 @@
+{"overrides":[{"predicate":{"custom_model_data":1},"model":"modelengine:internal_fire/fire_0"},{"predicate":{"custom_model_data":2},"model":"modelengine:internal_fire/fire_1"}],"parent":"minecraft:item/generated","textures":{"layer0":"minecraft:item/leather_horse_armor"}}

@@ -1,0 +1,85 @@
+Model-Engine:
+  Print-Script-Warnings: false
+  Use-State-Machine: false
+  Engine-Threads: 4
+  Max-Engine-Threads: 10
+  Sync-Client-Tick-End: true
+  Load-On-World-Load: false
+  Unload-On-World-Unload: false
+  Manual-Translucency-Order: false
+  Default-Animation-Priority: 0
+  Client-Sync-Interval: 60000
+  Lower-Scale-Limit: 0.001
+  Force-Custom-Model-Data: false
+  Process-Empty-Timeline: false
+  Render-Fire-On-Model: true
+  MineSkin-API-Key: ''
+  User-Limb:
+    Eager-Generate-Skins: true
+    Default-Classic-Skin: Steve
+    Default-Slim-Skin: Alex
+    Default-Skins:
+      Steve:
+        base64: iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAdVBMVEUAAAAKvLwAzMwmGgokGAgrHg0zJBE/KhW3g2uzeV5SPYn///+qclmbY0mQWT8Af38AaGhVVVWUYD52SzOBUzmPXj5JJRBCHQp3QjVqQDA0JRIoKCg3Nzc/Pz9KSko6MYlBNZtGOqUDenoFiIgElZUApKQAr6/wvakZAAAAAXRSTlMAQObYZgAAAolJREFUeNrt1l1rHucZReFrj/whu5hSCCQtlOTE/f+/Jz4q9Cu0YIhLcFVpVg+FsOCVehi8jmZgWOzZz33DM4CXlum3gH95GgeAzQZVeL4gTm6Cbp4vqFkD8HwBazPY8wWbMq9utu3mNZ5fotVezbzOE3kBEFbaZuc8kb00NTMUbWJp678Xf2GV7RRtx1TDQQ6XBNvsmL2+2vHq1TftmMPIyAWujtN2cl274ua2jpVpZneXEjjo7XW1q53V9ds4ODO5xIuhvGHvfLI3aixauig415uuO2+vl9+cncfsFw25zL650fXn687jqnXuP68/X3+eV3zE7y6u9eB73MlfAcfbTf3yR8CfAX+if8S/H5/EAbAxj5LN48tULvEBOh8V1AageMTXe2YHAOwHbZxrzPkSR3+ffr8TR2JDzE/4Fj8CDgEwDsW+q+9GsR07hhg2CsALBgMo2v5wNxXnQXMeGQVW7gUAyKI2m6KDsJ8Au3++F5RZO+kKNQjQcLLWgjwUjBXLltFgWWMUUlviocBgNoxNGgMjSxiYAA7zgLFo2hgIENiDU8gQCzDOmViGFAsEuBcQSDCothhpJaDRA8E5fHqH2nTbYm5fHLo1V0u3B7DAuheoeScRYabjjjuzs17cHVaTrTXmK78m9swP34d9oK/dfeXSIH2PW/MXwPvxN/bJlxw8zlYAcEyeI6gNgA/O8P8neN8xe1IHP2gTzegjvhUDfuRygmwEs2GE4mkCDIAzm2R4yAuPsIdR9k8AvMc+3L9+2UEjo4WP0FpgP19O0MzCsqxIoMsdDBvYcQyGmO0ZJRoYCKjLJWY0BAhYwGUBCgkh8MRdOKt+ruqMwAB2OcEX94U1TPbYJP0PkyyAI1S6cSIAAAAASUVORK5CYII=
+      Alex:
+        base64: iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAZlBMVEUAAAD////v2r/r0LDvu7HfxKLUt4/zqFiUyJKMvorrmD+GuYTljT97snjegS5xq26UlmuAglpvb29lZWV8Vz51UDhYWFhyTjZPT09sRi5kQSwjYiQrVChcOyc/Pz82NjYYOBYoKCgm8xoJAAAAAXRSTlMAQObYZgAAAwZJREFUeNrtlu1W6jAQRWtjWiaZtCC9/YgC8v4vec9Mg6Uur6b8ve6S0Lo8O2NYmClusOMGF7Nr8HKu2IoDTYPk44K6lvBciePNAm7mlTGz3G2voAaYZg9vFzCCjtnZqoHjAYHDJjAM1tqqgmR7Bahf9tFaA6zND6JwXRpxxosZIkz4uQzOWFmTrJPOUgdjOP1hzu7flmNrJe4wtCBoMgR1LVE1mNIYNbAurpafN5N5Xto8vZbl65PhWg0aRiU/C2Rpa0x5w/LHnjQwZVTgGk755+eyNMbWXDeukQIwMjaRm6qyJjmMtTAi1ziHF0OQQwsul+u1SJBnZsTbRJEgIqzxD8H1erksAt80MLTtCawFpvpScDqtKzhUYpA8yKgAv7Wq4GCripmT4PsKPFGIQxdjbFsPCPiDsbY6tAvBU2K+KRZiCHHquimC0ylGCoH8vjSmVEG4xb0Mmb2MYmGYpgH5boBA7iAIPuxL5CUtT0Q72u0wy6SDioVOosh3k5ggQIZgQB4iDITlOqwoFiaJwzJAcMJARhOShUCX3AGjWMWYYqHv+zghHntwPPaoWQJh58mLRe5FUSpQ6BenWDgi1B81rCAki0oIgiDvQRRlMkh+JdDgi2b78zieEUKEWglRG4gQp+8EEupTeOz78f39/U32n1oKb3iAQ642CWQfPlWAUAr3MtoQ2jck4XmTe7wL7ykPrFkJRkm9HCUuopF8CN6TXsGTEAjvt2+7Gu4Fl/N5xN+PMs6XCwZJLv4BER480MzHFsyfwi9ZpDNSYH7IIKcDPKB4iHSwPk7tVo974ZDYZ1VQ/PKfg9Nsddg6ouWfyCMNh2OqzBbBCdxXUDMq2Cq4r6CmDRVEoRvm4z4Q8OwowdmCbgDThEq8Jwg8pb4gSzANU5cY4l1ngCtDMM0NR4yYwfS5LzgoewXPXwuQ1bZDsIJJ2OJHPvcL49wQJEyGQI+5pV/o9Sj8IKcCSd31C5sFEhrv+gVrzAbBul9QINiwB+t+QdHWLBmyPgXtF8CtX5CO4LsK/gL4WlU0/HKH/gAAAABJRU5ErkJggg==
+        slim: true
+  Default-Animations:
+    IDLE: idle
+    WALK: walk
+    STRAFE: strafe
+    JUMP_START: jump_start
+    JUMP: jump
+    JUMP_END: jump_end
+    HOVER: hover
+    FLY: fly
+    SPAWN: spawn
+    DEATH: death
+Model-Generator:
+  Delete-Old: true
+  Register-Post-Server: true
+  Assets-Post-Server: true
+  Compile-Post-Server: true
+  Enable-Error: true
+  Debug-Level: 1
+  Namespace: modelengine
+  Create-Zip: true
+  Create-Atlas: true
+  Create-Shader: true
+  Create-MC-META: true
+  Item-Model: LEATHER_HORSE_ARMOR
+  Item-Models: []
+  Max-Generator-Threads: 10
+Network-Optimization:
+  Bundle-Everything: false
+  Bundle-Size: 512
+  Override-Move-To-Method: true
+  Cull-Interval: 4
+  Culling-Threads: 4
+  Max-Culling-Threads: 10
+  Vertical-Render-Distance:
+    Enabled: true
+    Vertical-Render-Distance: 32
+    Cull-Type: CULLED
+  Skip-Models-Behind-Viewer:
+    Enabled: true
+    View-Angle: 180
+    Force-Render-Radius: 5
+    Cull-Type: MOVEMENT_ONLY
+  Skip-Blocked-Models:
+    Enabled: true
+    Force-Render-Radius: 5
+    Cull-Type: CULLED
+    Use-Paper-Clip-Method: false
+    Force-Render-Size:
+      Width: 32
+      Height: 32
+  Reduce-Update-When-Far:
+    Enabled: true
+    Active-By-Default: true
+    Falloff-Length: 8
+    Falloff-Multiplier: 0.85
+    Full-Update-Distance: 16
+    Full-Update-Distance-Multiplier-By-Size: 1
+    Max-Rate-Multiplier: 1
+    Min-Rate-Multiplier: 0.05
