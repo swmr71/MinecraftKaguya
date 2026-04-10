@@ -1,0 +1,429 @@
+################################################################
+#
+# Hard-coded stats
+#
+################################################################
+
+ATTACK_DAMAGE:
+  Enabled: false
+  AlwaysActive: false
+  Display: 'Damage'
+  Formatting:
+    Additive: '+<value> Damage'
+    Multiply: '+<value> Damage'
+    Compound: 'x<value> Damage'
+  BaseValue: 1
+
+ATTACK_SPEED:
+  Enabled: false
+  Display: 'Attack Speed'
+  Formatting:
+    Additive: '+<value> Attack Speed'
+    Multiply: '+<value> Attack Speed'
+    Compound: 'x<value> Attack Speed'
+  BaseValue: 4.0
+
+BONUS_DAMAGE:
+  Enabled: false
+  Display: 'Bonus Damage'
+  Formatting:
+    Additive: '+<value> Bonus Damage'
+    Multiply: '+<value> Bonus Damage'
+    Compound: 'x<value> Bonus Damage'
+  BaseValue: 0
+
+CRITICAL_STRIKE_CHANCE:
+  Enabled: false
+  Display: 'Critical Strike'
+  Formatting:
+    Additive: '+<value> Critical Strike'
+    Multiply: '+<value> Critical Strike'
+    Compound: 'x<value> Critical Strike'
+  BaseValue: 0
+  MinValue: 0
+  Skills:
+    - particles{p=crit;a=50;hS=1;y=1;s=1} @trigger
+
+CRITICAL_STRIKE_DAMAGE:
+  Enabled: false
+  Display: 'Critical Damage'
+  Formatting:
+    Additive: '+<value> Critical Damage'
+    Multiply: '+<value> Critical Damage'
+    Compound: 'x<value> Critical Damage'
+  BaseValue: 1
+
+CRITICAL_STRIKE_RESILIENCE:
+  Enabled: false
+  Display: 'Resilience'
+  Formatting:
+    Additive: '+<value> Resilience'
+    Multiply: '+<value> Resilience'
+    Compound: 'x<value> Resilience'
+  BaseValue: 0
+
+DAMAGE_REDUCTION:
+  Enabled: false
+  Display: 'Damage Reduction'
+  Formatting:
+    Additive: '+<value> Damage Reduction'
+    Multiply: '+<value> Damage Reduction'
+    Compound: 'x<value> Damage Reduction'
+  BaseValue: 0
+
+DEFENSE:
+  Enabled: false
+  Display: 'Defense'
+  Formatting:
+    Additive: '+<value> Defense'
+    Multiply: '+<value> Defense'
+    Compound: 'x<value> Defense'
+  BaseValue: 0
+
+DODGE_CHANCE:
+  Enabled: false
+  Display: 'Dodge'
+  Formatting:
+    Additive: '+<value> Dodge Chance'
+    Multiply: '+<value> Dodge Chance'
+    Compound: 'x<value> Dodge Chance'
+  BaseValue: 0
+  Skills: []
+
+DODGE_NEGATION:
+  Enabled: false
+  Display: 'Accuracy'
+  Formatting:
+    Additive: '+<value> Accuracy'
+    Multiply: '+<value> Accuracy'
+    Compound: 'x<value> Accuracy'
+  BaseValue: 0
+
+HEALTH:
+  Enabled: false
+  Display: 'Health'
+  Formatting:
+    Additive: '+<value> Health'
+    Multiply: '+<value> Health'
+    Compound: 'x<value> Health'
+  BaseValue: 20
+  MinValue: 1
+
+HEALTH_REGENERATION:
+  Enabled: false
+  Display: 'Health Regeneration'
+  Formatting:
+    Additive: '+<value> Regeneration'
+    Multiply: '+<value> Regeneration'
+    Compound: 'x<value> Regeneration'
+  BaseValue: 0
+  MaxValue: 1000000
+  MinValue: 0
+  Frequency: 60
+
+LIFESTEAL_CHANCE:
+  Enabled: false
+  Display: 'Lifesteal Chance'
+  Formatting:
+    Additive: '+<value> Lifesteal Chance'
+    Multiply: '+<value> Lifesteal Chance'
+    Compound: 'x<value> Lifesteal Chance'
+  BaseValue: 0
+
+LIFESTEAL_POWER:
+  Enabled: true
+  Display: 'Lifesteal Power'
+  Formatting:
+    Additive: '+<value> Lifesteal Power'
+    Multiply: '+<value> Lifesteal Power'
+    Compound: 'x<value> Lifesteal Power'
+  BaseValue: 0.1
+
+MOVEMENT_SPEED:
+  Enabled: false
+  Display: 'Movement Speed'
+  Formatting:
+    Additive: '+<value> Movement Speed'
+    Multiply: '+<value>% Movement Speed'
+    Compound: 'x<value>% Movement Speed'
+  ParentStats:
+    - SPEED
+  Formula: '0.2 + (0.2 / (1 + e^(-0.005 * (SPD - 1000))))'
+
+PARRY_CHANCE:
+  Enabled: false
+  Display: 'Parry Chance'
+  BaseValue: 0
+  Priority: 0
+  Formatting:
+    Additive: '+<value> Parry Chance'
+    Multiply: '+<value> Parry Chance'
+    Compound: 'x<value> Parry Chance'
+  FrontAngle: 180
+  UsableMaterials:
+    - WOODEN_SWORD
+    - STONE_SWORD
+    - GOLDEN_SWORD
+    - IRON_SWORD
+    - DIAMOND_SWORD
+    - NETHERITE_SWORD
+  Skills: []
+
+PARRY_NEGATION:
+  Enabled: false
+  Display: 'Expertise'
+  Formatting:
+    Additive: '+<value> Expertise'
+    Multiply: '+<value> Expertise'
+    Compound: 'x<value> Expertise'
+  BaseValue: 0
+
+PARRY_POWER:
+  Enabled: false
+  Display: 'Parry Power'
+  BaseValue: 0.5
+  Formatting:
+    Additive: '+<value> Parry Power'
+    Multiply: '+<value> Parry Power'
+    Compound: 'x<value> Parry Power'
+
+PARRY_COUNTERATTACK:
+  Enabled: false
+  Display: 'Parry Counterattack'
+  BaseValue: 1
+  Formatting:
+    Additive: '+<value> Parry Counterattack'
+    Multiply: '+<value> Parry Counterattack'
+    Compound: 'x<value> Parry Counterattack'
+
+ARMOR:
+  Enabled: false
+  Display: 'Armor'
+  Formatting:
+    Additive: '+<value> Armor'
+    Multiply: '+<value> Armor'
+    Compound: 'x<value> Armor'
+  BaseValue: 0
+
+ARMOR_TOUGHNESS:
+    Enabled: false
+    Display: 'Armor Toughness'
+    Formatting:
+        Additive: '+<value> Armor Toughness'
+        Multiply: '+<value> Armor Toughness'
+        Compound: 'x<value> Armor Toughness'
+    BaseValue: 0
+
+BURNING_TIME:
+  Enabled: false
+  Display: 'Burning Time'
+  Formatting:
+    Additive: '+<value> Burning Time'
+    Multiply: '+<value> Burning Time'
+    Compound: 'x<value> Burning Time'
+  BaseValue: 0
+
+EXPLOSION_KNOCKBACK_RESISTANCE:
+    Enabled: false
+    Display: 'Explosion Knockback Resistance'
+    Formatting:
+        Additive: '+<value> Explosion Knockback Resistance'
+        Multiply: '+<value> Explosion Knockback Resistance'
+        Compound: 'x<value> Explosion Knockback Resistance'
+    BaseValue: 0
+
+FALL_DAMAGE_MULTIPLIER:
+    Enabled: false
+    Display: 'Fall Damage Multiplier'
+    Formatting:
+        Additive: '+<value> Fall Damage Multiplier'
+        Multiply: '+<value> Fall Damage Multiplier'
+        Compound: 'x<value> Fall Damage Multiplier'
+    BaseValue: 1
+
+GRAVITY:
+    Enabled: false
+    Display: 'Gravity'
+    Formatting:
+        Additive: '+<value> Gravity'
+        Multiply: '+<value> Gravity'
+        Compound: 'x<value> Gravity'
+    BaseValue: 0
+
+JUMP_STRENGTH:
+    Enabled: false
+    Display: 'Jump Strength'
+    Formatting:
+        Additive: '+<value> Jump Strength'
+        Multiply: '+<value> Jump Strength'
+        Compound: 'x<value> Jump Strength'
+    BaseValue: 0
+
+KNOCKBACK_RESISTANCE:
+    Enabled: false
+    Display: 'Knockback Resistance'
+    Formatting:
+        Additive: '+<value> Knockback Resistance'
+        Multiply: '+<value> Knockback Resistance'
+        Compound: 'x<value> Knockback Resistance'
+    BaseValue: 0
+
+MOVEMENT_EFFICIENCY:
+    Enabled: false
+    Display: 'Movement Efficiency'
+    Formatting:
+        Additive: '+<value> Movement Efficiency'
+        Multiply: '+<value> Movement Efficiency'
+        Compound: 'x<value> Movement Efficiency'
+    BaseValue: 0
+
+OXYGEN_BONUS:
+    Enabled: false
+    Display: 'Oxygen Bonus'
+    Formatting:
+        Additive: '+<value> Oxygen Bonus'
+        Multiply: '+<value> Oxygen Bonus'
+        Compound: 'x<value> Oxygen Bonus'
+    BaseValue: 0
+
+SAFE_FALL_DISTANCE:
+    Enabled: false
+    Display: 'Safe Fall Distance'
+    Formatting:
+        Additive: '+<value> Safe Fall Distance'
+        Multiply: '+<value> Safe Fall Distance'
+        Compound: 'x<value> Safe Fall Distance'
+    BaseValue: 0
+
+SNEAKING_SPEED:
+    Enabled: false
+    Display: 'Sneaking Speed'
+    Formatting:
+        Additive: '+<value> Sneaking Speed'
+        Multiply: '+<value> Sneaking Speed'
+        Compound: 'x<value> Sneaking Speed'
+    BaseValue: 0
+
+STEP_HEIGHT:
+    Enabled: false
+    Display: 'Step Height'
+    Formatting:
+        Additive: '+<value> Step Height'
+        Multiply: '+<value> Step Height'
+        Compound: 'x<value> Step Height'
+    BaseValue: 0
+
+WATER_MOVEMENT_EFFICIENCY:
+    Enabled: false
+    Display: 'Water Movement Efficiency'
+    Formatting:
+        Additive: '+<value> Water Movement Efficiency'
+        Multiply: '+<value> Water Movement Efficiency'
+        Compound: 'x<value> Water Movement Efficiency'
+    BaseValue: 0
+################################################################
+#
+# Example Custom Stats
+#
+################################################################
+
+ARMOR_GENERIC:
+  Enabled: false
+  Type: DAMAGE_MODIFIER
+  Triggers:
+    - DAMAGED
+  ExecutionPoint: PRE
+  Display: 'Generic Armor'
+  DamageFormula: 'd - v'
+  BaseValue: 0
+  Formatting:
+    Additive: '+<value> Generic Armor'
+    Multiply: '+<value> Generic Armor'
+    Compound: 'x<value> Generic Armor'
+
+ARMOR_BLUNT:
+  Enabled: false
+  Type: DAMAGE_MODIFIER
+  Triggers:
+    - DAMAGED
+  ExecutionPoint: PRE
+  Display: 'Blunt Armor'
+  DamageType: BLUNT
+  DamageFormula: 'd - v'
+  BaseValue: 0
+  Formatting:
+    Additive: '+<value> Blunt Armor'
+    Multiply: '+<value> Blunt Armor'
+    Compound: 'x<value> Blunt Armor'
+
+ARMOR_SHARP:
+  Enabled: false
+  Type: DAMAGE_MODIFIER
+  Triggers:
+    - DAMAGED
+  ExecutionPoint: PRE
+  Display: 'Sharp Armor'
+  DamageType: SHARP
+  DamageFormula: 'd - v'
+  BaseValue: 0
+  Formatting:
+    Additive: '+<value> Sharp Armor'
+    Multiply: '+<value> Sharp Armor'
+    Compound: 'x<value> Sharp Armor'
+
+DAMAGE_BLUNT:
+  Enabled: false
+  Type: DAMAGE_BONUS
+  Priority: 1
+  Triggers:
+    - ATTACK
+  ExecutionPoint: PRE
+  Display: 'Blunt Damage'
+  DamageType: BLUNT
+  BaseValue: 0
+  Formatting:
+    Additive: '+<value> Blunt Damage'
+    Multiply: '+<value> Blunt Damage'
+    Compound: 'x<value> Blunt Damage'
+
+DAMAGE_SHARP:
+  Enabled: false
+  Type: DAMAGE_BONUS
+  Priority: 2
+  Triggers:
+    - ATTACK
+  ExecutionPoint: PRE
+  Display: 'Sharp Damage'
+  DamageType: SHARP
+  BaseValue: 0
+  Formatting:
+    Additive: '+<value> Sharp Damage'
+    Multiply: '+<value> Sharp Damage'
+    Compound: 'x<value> Sharp Damage'
+
+FIRE_RESISTANCE:
+  Enabled: false
+  Display: 'Fire Resistance'
+  Formatting:
+    Additive: '+<value> Fire Resistance'
+    Multiply: '+<value> Fire Resistance'
+    Compound: 'x<value> Fire Resistance'
+  Type: DAMAGE_MODIFIER
+  Triggers:
+    - DAMAGED
+  Conditions:
+    - (damageCause FIRE || damageCause FIRE_TICK)
+  ExecutionPoint: PRE
+  DamageFormula: 'd * (1 - v)'
+  MaxValue: 1
+  MinValue: 0
+
+SPEED:
+  Enabled: false
+  AlwaysActive: false
+  Type: STATIC
+  FormulaKey: 'SPD'
+  Formatting:
+    Additive: '+<value> Speed'
+    Multiply: '+<value>% Speed'
+    Compound: 'x<value>% Speed'
