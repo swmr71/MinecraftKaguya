@@ -1,0 +1,10 @@
+FlameRavager:
+  Type: RAVAGER
+  Display: '&6&lフレイム・ラヴェジャー'
+  Health: 100
+  Damage: 10
+  Options:
+    MovementSpeed: 0.3
+    PreventOtherDrops: true
+  Skills:
+  - skill{s=FireBreath} @self ~onTimer:100 # 5秒(100ticks)おきにスキル発動

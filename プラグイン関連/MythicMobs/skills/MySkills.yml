@@ -1,0 +1,5 @@
+FireBreath:
+  Skills:
+  - ignite{ticks=100} @PlayersInRadius{r=5}
+  - effect:particles{p=flame;amount=20;speed=0.5} @PlayersInRadius{r=5}
+  - message{m="&c熱いぞ！火の用心！"} @PlayersInRadius{r=5}
