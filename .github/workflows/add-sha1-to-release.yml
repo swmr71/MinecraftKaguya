@@ -1,0 +1,43 @@
+name: Add SHA1 to Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  add-sha1:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Calculate SHA1 and Update Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_URL: ${{ github.event.release.html_url }}
+        run: |
+          # リリースの情報を取得
+          TAG_NAME="${{ github.event.release.tag_name }}"
+          
+          echo "Processing release: $TAG_NAME"
+          
+          # アセットの一覧を取得してダウンロード
+          gh release download "$TAG_NAME" --dir ./dist
+          
+          # ハッシュ値を計算
+          echo -e "\n### SHA-1 Checksums" > checksums.txt
+          echo '```' >> checksums.txt
+          cd ./dist && sha1sum * >> ../checksums.txt
+          cd ..
+          echo '```' >> checksums.txt
+          
+          # 現在のリリース本文を取得
+          gh release view "$TAG_NAME" --json body --template '{{.body}}' > current_body.txt
+          
+          # 本文にハッシュ値を追記して更新
+          cat current_body.txt checksums.txt > updated_body.txt
+          gh release edit "$TAG_NAME" --notes-file updated_body.txt
