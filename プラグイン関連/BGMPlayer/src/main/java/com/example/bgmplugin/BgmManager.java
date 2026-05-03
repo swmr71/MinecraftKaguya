@@ -59,9 +59,9 @@ public class BgmManager implements Listener {
 
         if (soundList.isEmpty()) {
             plugin.getLogger().warning("config.yml の sounds が空です！BGMが再生されません。");
-        } else {
+        } // else {
             // plugin.getLogger().info(soundList.size() + " 曲を読み込みました。");
-        }
+        // }
 
         // リロード時は全プレイヤーのループを再起動
         for (Player p : plugin.getServer().getOnlinePlayers()) {
