@@ -60,7 +60,7 @@ public class BgmManager implements Listener {
         if (soundList.isEmpty()) {
             plugin.getLogger().warning("config.yml の sounds が空です！BGMが再生されません。");
         } else {
-            plugin.getLogger().info(soundList.size() + " 曲を読み込みました。");
+            // plugin.getLogger().info(soundList.size() + " 曲を読み込みました。");
         }
 
         // リロード時は全プレイヤーのループを再起動
@@ -86,7 +86,7 @@ public class BgmManager implements Listener {
         Player player = event.getPlayer();
 
         if (isGeyserPlayer(player)) {
-            plugin.getLogger().info(player.getName() + " はBedrockプレイヤーです。直接BGMを開始します。");
+            // plugin.getLogger().info(player.getName() + " はBedrockプレイヤーです。直接BGMを開始します。");
             plugin.getServer().getScheduler().runTaskLater(plugin, () -> startLoop(player), 300L);
             return;
         }
@@ -108,7 +108,7 @@ public class BgmManager implements Listener {
 
         switch (event.getStatus()) {
             case SUCCESSFULLY_LOADED -> {
-                plugin.getLogger().info(player.getName() + " がリソースパックを適用しました。BGMを開始します。");
+                // plugin.getLogger().info(player.getName() + " がリソースパックを適用しました。BGMを開始します。");
                 plugin.getServer().getScheduler().runTaskLater(plugin, () -> startLoop(player), 10L);
             }
             case DECLINED -> {
@@ -148,8 +148,8 @@ public class BgmManager implements Listener {
         // 再生
         playSound(player, entry.key());
 
-        plugin.getLogger().info(player.getName() + " に BGM再生: " + entry.key()
-                + " (" + (entry.durationTicks() / 20) + "秒)");
+        //plugin.getLogger().info(player.getName() + " に BGM再生: " + entry.key()
+        //        + " (" + (entry.durationTicks() / 20) + "秒)");
 
         // 曲が終わったら次を再生
         BukkitTask task = plugin.getServer().getScheduler().runTaskLater(
