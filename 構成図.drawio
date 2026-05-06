@@ -1,0 +1,13 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ページ-1" id="TV6uLhXyiC8lSJH-KgKO">
+    <mxGraphModel dx="479" dy="265" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="zbAPKtZ6irUNMnxU-yNN-1" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" value="Redis&lt;div&gt;10.2.1.28&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="80" x="640" y="280" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
